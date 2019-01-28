@@ -19,7 +19,6 @@ public interface UserMapper {
     })
     List<User> getUserAll();
 
-
     @Select("select * from user where userid = #{id}")
     @Results({
             @Result(property = "userId",  column = "userid", id=true),
