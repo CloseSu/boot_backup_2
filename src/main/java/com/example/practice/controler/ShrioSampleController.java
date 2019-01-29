@@ -18,12 +18,10 @@ public class ShrioSampleController {
 
     @GetMapping("/login")
     public void login(String username, String password) {
-        System.out.println(username + " " + password);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         token.setRememberMe(true);
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.login(token);
-        System.out.println(token);
     }
 
     @GetMapping("/logout")

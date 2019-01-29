@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 @ToString
@@ -16,4 +17,6 @@ public class User implements Serializable {
     String password;
     String roleIds;
     String perIds;
+    Set<String> roleSet;
+    Set<String> permissionSet;
 }

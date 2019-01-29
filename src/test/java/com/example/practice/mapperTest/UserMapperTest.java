@@ -31,6 +31,8 @@ public class UserMapperTest {
     public void BtestQuery() {
         User user = userMapper.getUserById(0);
         System.out.println(user);
+        User user2 = userMapper.getUserByName("guest");
+        System.out.println(user2);
     }
 
     @Test

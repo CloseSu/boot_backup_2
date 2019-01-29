@@ -1,6 +1,8 @@
 package com.example.practice.shrio;
 
-import com.example.practice.dao.ShiroSampleDao;
+import com.example.practice.entity.User;
+import com.example.practice.mapper.UserMapper;
+import com.example.practice.service.UerService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -8,23 +10,23 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Set;
-
 public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
-    private ShiroSampleDao shiroSampleDao;
+    private UerService uerService;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) super.getAvailablePrincipal(principalCollection);
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        Set<String> roles = shiroSampleDao.getRolesByUsername(username);
-        authorizationInfo.setRoles(roles);
-        roles.forEach(role -> {
-            Set<String> permissions = this.shiroSampleDao.getPermissionsByRole(role);
-            authorizationInfo.addStringPermissions(permissions);
-        });
+
+        User user = uerService.getUserAll(username);
+        authorizationInfo.setRoles(user.getRoleSet());
+        authorizationInfo.setStringPermissions(user.getPermissionSet());
+
         return authorizationInfo;
     }
 
@@ -32,7 +34,7 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String username = token.getUsername();
-        String password = this.shiroSampleDao.getPasswordByUsername(username);
+        String password = userMapper.getUserByName(username).getPassword();
         return new SimpleAuthenticationInfo(username, password, getName());
     }
 

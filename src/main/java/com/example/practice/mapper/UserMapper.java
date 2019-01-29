@@ -29,6 +29,17 @@ public interface UserMapper {
     })
     User getUserById(Integer userId);
 
+    @Select("select * from user where username = #{username}")
+    @Results({
+            @Result(property = "userId",  column = "userid", id=true),
+            @Result(property = "username", column = "username"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "roleIds", column = "roleids"),
+            @Result(property = "perIds", column = "perids")
+    })
+    User getUserByName(String username);
+
+
     @Insert("INSERT INTO user(username,password,roleIds,perIds) " +
             "VALUES(#{username}, #{password}, #{roleIds}, #{perIds})")
     @Options(useGeneratedKeys=true, keyProperty="userId")
