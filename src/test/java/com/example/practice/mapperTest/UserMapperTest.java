@@ -2,19 +2,17 @@ package com.example.practice.mapperTest;
 
 import com.example.practice.entity.User;
 import com.example.practice.mapper.UserMapper;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UserMapperTest {
 
     @Autowired
@@ -22,12 +20,14 @@ public class UserMapperTest {
     private static User testUser = new User();
 
     @Test
+    @Order(1)
     public void AtestQueryAll() {
         List<User> users = userMapper.getUserAll();
         users.forEach(user -> System.out.println(user.getUsername()));
     }
 
     @Test
+    @Order(2)
     public void BtestQuery() {
         User user = userMapper.getUserById(0);
         System.out.println(user);
@@ -36,6 +36,7 @@ public class UserMapperTest {
     }
 
     @Test
+    @Order(3)
     public void CtestInsert() {
         System.out.println("testInsert====================");
         testUser.setUsername("test");
@@ -47,6 +48,7 @@ public class UserMapperTest {
     }
 
     @Test
+    @Order(4)
     public void DtestUpdate() {
         System.out.println("testUpdate====================");
         User user = userMapper.getUserById(testUser.getUserId());
@@ -58,6 +60,7 @@ public class UserMapperTest {
     }
 
     @Test
+    @Order(5)
     public void EtestDelete() {
         System.out.println("testDelete====================");
         userMapper.deleteById(testUser.getUserId());
