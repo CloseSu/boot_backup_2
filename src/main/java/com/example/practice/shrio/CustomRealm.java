@@ -2,7 +2,7 @@ package com.example.practice.shrio;
 
 import com.example.practice.entity.User;
 import com.example.practice.mapper.UserMapper;
-import com.example.practice.service.UerService;
+import com.example.practice.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
-    private UerService uerService;
+    private UserService userService;
 
     @Autowired
     private UserMapper userMapper;
@@ -23,7 +23,7 @@ public class CustomRealm extends AuthorizingRealm {
         String username = (String) super.getAvailablePrincipal(principalCollection);
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 
-        User user = uerService.getUserAll(username);
+        User user = userService.getUserAllByName(username);
         authorizationInfo.setRoles(user.getRoleSet());
         authorizationInfo.setStringPermissions(user.getPermissionSet());
 

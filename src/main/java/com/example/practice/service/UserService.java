@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
 @Transactional
-public class UerService {
+public class UserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -24,7 +25,7 @@ public class UerService {
     @Autowired
     private UserPermissionMapper userPermissionMapper;
 
-    public User getUserAll(String username) {
+    public User getUserAllByName(String username) {
         User user = userMapper.getUserByName(username);
         Set<String> roleSet = new HashSet<>();
         for(String roleId: user.getRoleIds().split(",")) {
@@ -40,5 +41,9 @@ public class UerService {
         user.setPermissionSet(permissionSet);
 
         return user;
+    }
+
+    public List<User> getUserAll() {
+        return userMapper.getUserAll();
     }
 }
