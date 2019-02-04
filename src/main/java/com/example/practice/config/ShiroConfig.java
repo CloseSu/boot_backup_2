@@ -1,6 +1,7 @@
 package com.example.practice.config;
 
 import com.example.practice.shrio.CustomRealm;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@Slf4j
 public class ShiroConfig {
 
     @Bean(name = "customRealm")
