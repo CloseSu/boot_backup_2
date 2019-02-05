@@ -11,7 +11,7 @@ public interface UserMapper {
 
     @Select("select * from user")
     @Results({
-            @Result(property = "userId",  column = "userid", id=true),
+            @Result(property = "userId", column = "userid", id = true),
             @Result(property = "username", column = "username"),
             @Result(property = "password", column = "password"),
             @Result(property = "roleIds", column = "roleids"),
@@ -21,7 +21,7 @@ public interface UserMapper {
 
     @Select("select * from user where userid = #{id}")
     @Results({
-            @Result(property = "userId",  column = "userid", id=true),
+            @Result(property = "userId", column = "userid", id = true),
             @Result(property = "username", column = "username"),
             @Result(property = "password", column = "password"),
             @Result(property = "roleIds", column = "roleids"),
@@ -31,7 +31,7 @@ public interface UserMapper {
 
     @Select("select * from user where username = #{username}")
     @Results({
-            @Result(property = "userId",  column = "userid", id=true),
+            @Result(property = "userId", column = "userid", id = true),
             @Result(property = "username", column = "username"),
             @Result(property = "password", column = "password"),
             @Result(property = "roleIds", column = "roleids"),
@@ -42,7 +42,7 @@ public interface UserMapper {
 
     @Insert("INSERT INTO user(username,password,roleIds,perIds) " +
             "VALUES(#{username}, #{password}, #{roleIds}, #{perIds})")
-    @Options(useGeneratedKeys=true, keyProperty="userId")
+    @Options(useGeneratedKeys = true, keyProperty = "userId")
     void insert(User user);
 
     @Update("UPDATE user SET " +

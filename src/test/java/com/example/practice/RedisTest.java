@@ -15,7 +15,7 @@ public class RedisTest {
     @Test
     public void testString() {
         ValueOperations<String, String> operations = redisTemplate.opsForValue();
-        operations.set("testKey","123");
+        operations.set("testKey", "123");
         System.out.println(operations.get("testKey"));
     }
 }

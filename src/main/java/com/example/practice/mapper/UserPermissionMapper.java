@@ -11,21 +11,21 @@ public interface UserPermissionMapper {
 
     @Select("select * from userpermision")
     @Results({
-            @Result(property = "perId",  column = "perId", id=true),
+            @Result(property = "perId", column = "perId", id = true),
             @Result(property = "permission", column = "permission")
     })
     List<UserPermission> getUserPermissionAll();
 
     @Select("select * from userpermision where perId = #{id}")
     @Results({
-            @Result(property = "perId",  column = "perId", id=true),
+            @Result(property = "perId", column = "perId", id = true),
             @Result(property = "permission", column = "permission")
     })
     UserPermission getUserPermissionById(Integer perId);
 
     @Insert("INSERT INTO userpermision(permission) " +
             "VALUES(#{permission})")
-    @Options(useGeneratedKeys=true, keyProperty="perId")
+    @Options(useGeneratedKeys = true, keyProperty = "perId")
     void insert(UserPermission userPermission);
 
     @Update("UPDATE userpermision SET " +

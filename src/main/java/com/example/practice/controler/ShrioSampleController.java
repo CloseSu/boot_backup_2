@@ -21,7 +21,7 @@ public class ShrioSampleController {
     @Autowired
     private ShiroSampleService shiroSampleService;
 
-    @ApiOperation(value = "登入" , notes = "登入方法")
+    @ApiOperation(value = "登入", notes = "登入方法")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用戶名稱", required = true, dataType = "String"),
             @ApiImplicitParam(name = "password", value = "用戶密碼", required = true, dataType = "String")
@@ -34,21 +34,21 @@ public class ShrioSampleController {
         currentUser.login(token);
     }
 
-    @ApiOperation(value = "logout" , notes = "登出")
+    @ApiOperation(value = "logout", notes = "登出")
     @GetMapping("/logout")
     public void logout() {
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();
     }
 
-    @ApiOperation(value = "test read" , notes = "測試讀")
+    @ApiOperation(value = "test read", notes = "測試讀")
     @GetMapping("/read")
     @RequiresPermissions("read")
     public String read() {
         return this.shiroSampleService.read();
     }
 
-    @ApiOperation(value = "test write" , notes = "測試寫")
+    @ApiOperation(value = "test write", notes = "測試寫")
     @GetMapping("/write")
     @RequiresPermissions("write")
     public String write() {

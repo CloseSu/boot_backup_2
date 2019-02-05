@@ -1,8 +1,8 @@
 package com.example.practice.enums;
 
 public enum UserPerEnum {
-    READ(0,"read"),
-    WRITE(1,"write");
+    READ(0, "read"),
+    WRITE(1, "write");
 
     Integer perId;
     String permision;

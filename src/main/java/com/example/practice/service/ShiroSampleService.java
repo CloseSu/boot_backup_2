@@ -6,6 +6,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ShiroSampleService {
 
-    public String read(){return "reading";}
-    public String write(){return "writting";}
+    public String read() {
+        return "reading";
+    }
+
+    public String write() {
+        return "writting";
+    }
 }

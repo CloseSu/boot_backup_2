@@ -19,7 +19,9 @@ import org.springframework.context.annotation.Configuration;
 public class ShiroConfig {
 
     @Bean(name = "customRealm")
-    public CustomRealm customRealm(){return new CustomRealm();}
+    public CustomRealm customRealm() {
+        return new CustomRealm();
+    }
 
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager defaultWebSecurityManager(CustomRealm customRealm) {
@@ -31,7 +33,9 @@ public class ShiroConfig {
     }
 
     @Bean(name = "lifecycleBeanPostProcessor")
-    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() { return new LifecycleBeanPostProcessor(); }
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
+    }
 
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultSecurityManager securityManager) {

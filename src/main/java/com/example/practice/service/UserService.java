@@ -28,12 +28,12 @@ public class UserService {
     public User getUserAllByName(String username) {
         User user = userMapper.getUserByName(username);
         Set<String> roleSet = new HashSet<>();
-        for(String roleId: user.getRoleIds().split(",")) {
+        for (String roleId : user.getRoleIds().split(",")) {
             UserRole userRole = userRoleMapper.getUserRoleById(Integer.parseInt(roleId));
             roleSet.add(userRole.getRole());
         }
         Set<String> permissionSet = new HashSet<>();
-        for (String perId: user.getPerIds().split(",")) {
+        for (String perId : user.getPerIds().split(",")) {
             UserPermission userPermission = userPermissionMapper.getUserPermissionById(Integer.parseInt(perId));
             permissionSet.add(userPermission.getPermission());
         }

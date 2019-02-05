@@ -27,13 +27,13 @@ public class LogTest {
     @BeforeEach
     public void init() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).
-                  addFilters((Filter) webApplicationContext.getBean("shiroFilter")).build();
+                addFilters((Filter) webApplicationContext.getBean("shiroFilter")).build();
     }
 
 
     @Test
     public void testLogin() {
-        String loginUrl = "http://localhost:8080/login?username=+"+ username + "&password=" + password;
+        String loginUrl = "http://localhost:8080/login?username=+" + username + "&password=" + password;
         try {
             MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(loginUrl)).andReturn();
             System.out.println(result.getResponse().getStatus());

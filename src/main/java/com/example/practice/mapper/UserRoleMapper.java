@@ -11,21 +11,21 @@ public interface UserRoleMapper {
 
     @Select("select * from userrole")
     @Results({
-            @Result(property = "roleId",  column = "roleId", id=true),
+            @Result(property = "roleId", column = "roleId", id = true),
             @Result(property = "role", column = "role")
     })
     List<UserRole> getUserRoleAll();
 
     @Select("select * from userrole where roleId = #{id}")
     @Results({
-            @Result(property = "roleId",  column = "roleId", id=true),
+            @Result(property = "roleId", column = "roleId", id = true),
             @Result(property = "role", column = "role")
     })
     UserRole getUserRoleById(Integer roleId);
 
     @Insert("INSERT INTO userrole(role) " +
             "VALUES(#{role})")
-    @Options(useGeneratedKeys=true, keyProperty="roleId")
+    @Options(useGeneratedKeys = true, keyProperty = "roleId")
     void insert(UserRole userRole);
 
     @Update("UPDATE userrole SET " +
