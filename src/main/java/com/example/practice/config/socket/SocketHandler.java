@@ -1,27 +1,26 @@
 package com.example.practice.config.socket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
 public class SocketHandler implements WebSocketHandler {
 
-     // Websocket连接建立
+    Map<String, WebSocketSession> idSessionMap= new HashMap<>();
+
     @Override
     public void afterConnectionEstablished(WebSocketSession session)
             throws Exception {
-        boolean repeat = false;
         System.out.println("成功建立Websocket连接");
         session.sendMessage(new TextMessage("已建立socket連結"));
-        if(repeat) {
-            Thread.sleep(1000);
-            session.sendMessage(new TextMessage("您已從別地登陸, 此連結已將斷開"));
-            session.close();
-        }
+        System.out.println(session);
+        idSessionMap.put(session.getId(), session);
     }
 
     @Override
@@ -53,5 +52,21 @@ public class SocketHandler implements WebSocketHandler {
     @Override
     public boolean supportsPartialMessages() {
         return false;
+    }
+
+
+    @Scheduled(cron = "0/10 * * * * ?")
+    public void scheduleTsk() throws IOException {
+        //定時檢查是否登入
+        System.out.println("每秒執行 ");
+        for (Map.Entry<String, WebSocketSession> map: this.idSessionMap.entrySet()) {
+            String id = map.getKey();
+            WebSocketSession session = map.getValue();
+            System.out.println(id);
+            System.out.println("已在別處連線,此連線將關閉");
+            session.sendMessage(new TextMessage("已在別處連線,此連線將關閉 "));
+            session.close();
+            idSessionMap.remove(id);
+        }
     }
 }

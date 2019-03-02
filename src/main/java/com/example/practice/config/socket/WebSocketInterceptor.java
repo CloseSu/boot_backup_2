@@ -13,6 +13,7 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
+        //先檢核後連線
         System.out.println("-------------正要準備連線--------------------");
         System.out.println("-------------驗證成功------------------------");
         return true;
